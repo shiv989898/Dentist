@@ -108,57 +108,54 @@ export function ServicesGrid() {
           className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-8 pt-2"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {services.map((item, idx) => {
-            const Icon = item.icon
-            return (
-              <div 
-                key={idx}
-                onClick={() => setActiveIdx(idx)}
-                className={`snap-start shrink-0 w-[340px] sm:w-[420px] rounded-3xl p-8 bg-white border transition-all duration-300 flex flex-col justify-between cursor-pointer group ${
-                  activeIdx === idx 
-                    ? 'border-sky-600 shadow-xl ring-2 ring-sky-100' 
-                    : 'border-slate-200 shadow-2xs hover:border-slate-300'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <span className="text-4xl font-extrabold text-slate-200 font-serif group-hover:text-sky-600 transition-colors">
-                      {item.num}
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-100 text-[11px] font-bold uppercase tracking-wider">
-                      {item.tag}
-                    </span>
-                  </div>
-
-                  <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-slate-100 border border-slate-100">
-                    <img 
-                      src={item.img} 
-                      alt={item.title} 
-                      onError={handleImageError}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                    />
-                  </div>
-
-                  <span className="text-xs font-semibold text-sky-600 uppercase tracking-wider block mb-1">
-                    {item.subtitle}
+          {services.map((item, idx) => (
+            <div 
+              key={idx}
+              onClick={() => setActiveIdx(idx)}
+              className={`snap-start shrink-0 w-[340px] sm:w-[420px] rounded-3xl p-8 bg-white border transition-all duration-300 flex flex-col justify-between cursor-pointer group ${
+                activeIdx === idx 
+                  ? 'border-sky-600 shadow-xl ring-2 ring-sky-100' 
+                  : 'border-slate-200 shadow-2xs hover:border-slate-300'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-4xl font-extrabold text-slate-200 font-serif group-hover:text-sky-600 transition-colors">
+                    {item.num}
                   </span>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-3">{item.title}</h3>
-                  <p className="text-slate-500 text-sm font-light leading-relaxed mb-6">
-                    {item.description}
-                  </p>
+                  <span className="px-3 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-100 text-[11px] font-bold uppercase tracking-wider">
+                    {item.tag}
+                  </span>
                 </div>
 
-                <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-700">Est. {item.duration}</span>
-                  <Link to="/services">
-                    <span className="text-xs font-bold text-slate-900 group-hover:text-sky-600 flex items-center gap-1">
-                      Learn More <ArrowUpRight className="w-4 h-4" />
-                    </span>
-                  </Link>
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-slate-100 border border-slate-100">
+                  <img 
+                    src={item.img} 
+                    alt={item.title} 
+                    onError={handleImageError}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                  />
                 </div>
+
+                <span className="text-xs font-semibold text-sky-600 uppercase tracking-wider block mb-1">
+                  {item.subtitle}
+                </span>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                <p className="text-slate-500 text-sm font-light leading-relaxed mb-6">
+                  {item.description}
+                </p>
               </div>
-            )
-          })}
+
+              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-700">Est. {item.duration}</span>
+                <Link to="/services">
+                  <span className="text-xs font-bold text-slate-900 group-hover:text-sky-600 flex items-center gap-1">
+                    Learn More <ArrowUpRight className="w-4 h-4" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>
