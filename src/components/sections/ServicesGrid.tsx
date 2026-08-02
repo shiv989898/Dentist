@@ -1,135 +1,158 @@
 import { motion } from 'framer-motion'
-import { Sparkles, Stethoscope, Smile, Activity, Heart, Syringe, ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Sparkles, Smile, Activity, Stethoscope, Syringe, Heart, ArrowUpRight } from 'lucide-react'
 
 const services = [
   {
-    title: 'Cosmetic Dentistry & Veneers',
-    subtitle: 'Signature Smile Design',
-    description: 'Custom hand-crafted porcelain veneers, digital smile design, and instant laser teeth whitening.',
+    num: '01',
+    title: 'Porcelain Veneers & Smile Architecture',
+    subtitle: 'Signature Aesthetic',
+    description: 'Custom hand-crafted ceramic veneers designed to match your facial symmetry, skin tone, and natural translucency.',
     icon: Sparkles,
-    highlight: true,
-    tag: 'Most Popular',
-    img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop'
+    featured: true,
+    tag: 'Bespoke Artistry',
+    img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop'
   },
   {
-    title: 'Invisalign & Clear Aligners',
+    num: '02',
+    title: 'Invisalign Aligners',
     subtitle: 'Discreet Orthodontics',
-    description: 'Virtually invisible aligners designed with 3D digital precision for effortless teeth straightening.',
+    description: 'Virtually invisible aligners planned using 3D intraoral digital scans.',
     icon: Smile,
-    highlight: false,
-    tag: '3D Planned',
-    img: 'https://images.unsplash.com/photo-1598256989800-fea5ce5146f1?q=80&w=800&auto=format&fit=crop'
+    featured: false
   },
   {
-    title: 'Dental Implants & Reconstruction',
+    num: '03',
+    title: '3D-Guided Implants',
     subtitle: 'Permanent Restorations',
-    description: 'Biocompatible titanium implants and ceramic crowns engineered for natural aesthetics.',
+    description: 'Biocompatible titanium tooth replacements with custom ceramic crowns.',
     icon: Activity,
-    highlight: false,
-    tag: 'Lifetime Warranty'
+    featured: false
   },
   {
-    title: 'General & Preventative Care',
-    subtitle: 'Comprehensive Wellness',
-    description: 'Pain-free ultra-sonic cleanings, digital oral cancer screening, and enamel fortification.',
+    num: '04',
+    title: 'General Wellness & Laser Care',
+    subtitle: 'Preventative Health',
+    description: 'Ultrasonic cleaning, pain-free laser gum therapy, and oral screening.',
     icon: Stethoscope,
-    highlight: false
+    featured: false
   },
   {
+    num: '05',
     title: 'Surgical & Emergency Care',
-    subtitle: 'Immediate Relief',
-    description: 'Gentle wisdom teeth extraction, root canal therapy, and 24/7 priority emergency response.',
+    subtitle: 'Immediate Response',
+    description: 'Gentle wisdom teeth extraction and 24/7 priority emergency response.',
     icon: Syringe,
-    highlight: false
-  },
-  {
-    title: 'Pediatric Dentistry',
-    subtitle: 'Gentle Youth Care',
-    description: 'Fun, fear-free visits designed to build positive oral health habits for children of all ages.',
-    icon: Heart,
-    highlight: false
+    featured: false
   }
 ]
 
 export function ServicesGrid() {
   return (
-    <section className="py-28 bg-slate-950 text-white relative overflow-hidden border-t border-slate-900">
-      
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+    <section className="py-28 bg-slate-50 text-slate-900 border-t border-slate-200">
+      <div className="container mx-auto px-4 lg:px-8">
         
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
-          <div className="max-w-2xl">
-            <span className="text-xs font-semibold uppercase tracking-widest text-teal-400 block mb-3">
-              Comprehensive Excellence
+        {/* Asymmetric Section Header */}
+        <div className="grid lg:grid-cols-12 gap-8 items-end mb-20">
+          <div className="lg:col-span-8">
+            <span className="text-xs font-bold uppercase tracking-widest text-sky-600 mb-3 block">
+              Bespoke Clinical Offerings
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-              Bespoke Treatments, <br />
-              <span className="font-serif italic font-normal text-slate-400">Uncompromising Standards.</span>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.1]">
+              Crafted for Your Unique <br />
+              <span className="font-serif italic font-normal text-sky-600">Facial Architecture.</span>
             </h2>
           </div>
-          <p className="text-slate-400 text-lg max-w-md font-light leading-relaxed">
-            Every procedure is crafted using state-of-the-art digital dentistry in a tranquil luxury atmosphere.
-          </p>
+          <div className="lg:col-span-4 text-left lg:text-right">
+            <Link to="/services">
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-900 hover:text-sky-600 border-b-2 border-slate-900 hover:border-sky-600 pb-1 transition-colors">
+                View Full Clinical Menu <ArrowUpRight className="w-4 h-4" />
+              </span>
+            </Link>
+          </div>
         </div>
 
-        {/* Luxury Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, idx) => {
-            const Icon = service.icon
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className={`group relative rounded-3xl p-8 transition-all duration-500 overflow-hidden border ${
-                  service.highlight 
-                    ? 'md:col-span-2 lg:col-span-2 bg-gradient-to-br from-slate-900 via-slate-900 to-teal-950/40 border-teal-500/30 hover:border-teal-400/60' 
-                    : 'bg-slate-900/60 hover:bg-slate-900 border-slate-800 hover:border-slate-700'
-                }`}
-              >
-                {/* Glow Accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 rounded-full blur-2xl group-hover:bg-teal-500/20 transition-all duration-500" />
+        {/* Pro Asymmetric Bento Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+          
+          {/* Main Large Featured Hero Card (7 Cols) */}
+          <div className="lg:col-span-7 apple-card rounded-3xl p-8 sm:p-10 bg-white flex flex-col justify-between relative overflow-hidden group">
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-3xl font-extrabold text-slate-200 font-serif group-hover:text-sky-600 transition-colors">
+                {services[0].num}
+              </span>
+              <span className="px-3.5 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-100 text-xs font-bold uppercase tracking-wider">
+                {services[0].tag}
+              </span>
+            </div>
 
-                {/* Card Top Row */}
-                <div className="flex items-center justify-between mb-8 relative z-10">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border transition-all duration-300 ${
-                    service.highlight 
-                      ? 'bg-teal-500 text-slate-950 border-teal-400 shadow-lg shadow-teal-500/25' 
-                      : 'bg-slate-800 text-teal-400 border-slate-700 group-hover:bg-teal-500 group-hover:text-slate-950 group-hover:border-teal-400'
-                  }`}>
-                    <Icon className="w-7 h-7" />
-                  </div>
+            <div className="space-y-4 mb-8">
+              <span className="text-xs font-semibold text-sky-600 uppercase tracking-wider block">
+                {services[0].subtitle}
+              </span>
+              <h3 className="text-3xl font-bold text-slate-900">{services[0].title}</h3>
+              <p className="text-slate-600 font-light leading-relaxed max-w-lg">
+                {services[0].description}
+              </p>
+            </div>
 
-                  <div className="flex items-center gap-3">
-                    {service.tag && (
-                      <span className="text-[11px] font-semibold tracking-wider uppercase px-3 py-1 rounded-full bg-teal-950 text-teal-300 border border-teal-800/80">
-                        {service.tag}
-                      </span>
-                    )}
-                    <div className="w-10 h-10 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-slate-700 transition-colors">
-                      <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/9] mt-4 border border-slate-100">
+              <img src={services[0].img} alt="Veneers" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            </div>
+          </div>
+
+          {/* Secondary Stack (5 Cols) */}
+          <div className="lg:col-span-5 grid gap-6">
+            {services.slice(1, 3).map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <div key={idx} className="apple-card rounded-3xl p-8 bg-white flex flex-col justify-between group">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-2xl font-extrabold text-slate-200 font-serif group-hover:text-sky-600 transition-colors">
+                      {item.num}
+                    </span>
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                      <Icon className="w-5 h-5" />
                     </div>
                   </div>
+
+                  <div>
+                    <span className="text-xs font-semibold text-sky-600 uppercase tracking-wider block mb-1">
+                      {item.subtitle}
+                    </span>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Bottom Row Asymmetric (2 Cards) */}
+          {services.slice(3).map((item, idx) => {
+            const Icon = item.icon
+            return (
+              <div key={idx} className="lg:col-span-6 apple-card rounded-3xl p-8 bg-white flex flex-col justify-between group">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-2xl font-extrabold text-slate-200 font-serif group-hover:text-sky-600 transition-colors">
+                    {item.num}
+                  </span>
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                    <Icon className="w-5 h-5" />
+                  </div>
                 </div>
 
-                {/* Card Content */}
-                <div className="relative z-10">
-                  <span className="text-xs font-medium text-teal-400 uppercase tracking-wider block mb-1">
-                    {service.subtitle}
+                <div>
+                  <span className="text-xs font-semibold text-sky-600 uppercase tracking-wider block mb-1">
+                    {item.subtitle}
                   </span>
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-teal-200 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-400 text-base leading-relaxed font-light">
-                    {service.description}
-                  </p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed">{item.description}</p>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
+
         </div>
 
       </div>

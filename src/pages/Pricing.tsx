@@ -1,6 +1,14 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { Check } from 'lucide-react'
+import { Check, Calculator, ShieldCheck } from 'lucide-react'
+
+const treatmentRates: Record<string, { basePrice: number; unitLabel: string }> = {
+  'Porcelain Veneer': { basePrice: 1200, unitLabel: 'teeth' },
+  'Invisalign Full Arch': { basePrice: 3800, unitLabel: 'arch' },
+  '3D Implant Restoration': { basePrice: 2500, unitLabel: 'implants' },
+  'Laser Whitening': { basePrice: 450, unitLabel: 'session' }
+}
 
 const membershipPlans = [
   {
@@ -47,6 +55,13 @@ const membershipPlans = [
 ]
 
 export function Pricing() {
+  const [selectedTreatment, setSelectedTreatment] = useState<string>('Porcelain Veneer')
+  const [quantity, setQuantity] = useState<number>(4)
+
+  const currentRate = treatmentRates[selectedTreatment]
+  const totalEst = currentRate.basePrice * quantity
+  const monthlyEst = Math.round(totalEst / 24)
+
   return (
     <div className="pt-24 pb-24 bg-white text-slate-900">
       
@@ -57,17 +72,87 @@ export function Pricing() {
             Transparent Investment
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-            Membership Plans & <span className="font-serif italic font-normal text-sky-600">Insurance</span>
+            Membership Plans & <span className="font-serif italic font-normal text-sky-600">Estimator</span>
           </h1>
           <p className="text-slate-600 text-lg font-light leading-relaxed">
-            We provide clear, upfront pricing with zero hidden fees. We work with all major PPO insurance providers.
+            We provide clear, upfront pricing with zero hidden fees. Calculate treatment estimates below.
           </p>
         </div>
       </section>
 
+      {/* Pro UI Treatment Estimator Widget */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
+          <div className="apple-card rounded-3xl p-8 sm:p-10 bg-slate-900 text-white shadow-2xl relative overflow-hidden">
+            
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center">
+                <Calculator className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Interactive Treatment Calculator</h3>
+                <p className="text-xs text-slate-400 font-light">Estimate your investment and monthly financing options</p>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Select Procedure</label>
+                  <select
+                    value={selectedTreatment}
+                    onChange={(e) => setSelectedTreatment(e.target.value)}
+                    className="w-full px-4 py-3 rounded-2xl bg-slate-800 border border-slate-700 text-sm text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  >
+                    {Object.keys(treatmentRates).map((t) => (
+                      <option key={t} value={t}>{t}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                      Quantity: {quantity} {currentRate.unitLabel}
+                    </label>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                    className="w-full accent-sky-500 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* Estimate Display Box */}
+              <div className="p-6 rounded-2xl bg-slate-800/80 border border-slate-700/80 text-center space-y-4">
+                <div>
+                  <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider block">Estimated Total</span>
+                  <span className="text-4xl font-extrabold text-white font-serif">${totalEst.toLocaleString()}</span>
+                </div>
+                <div className="pt-3 border-t border-slate-700">
+                  <span className="text-xs text-slate-400 block">As low as</span>
+                  <span className="text-lg font-bold text-sky-300">${monthlyEst}/mo</span>
+                  <span className="text-[11px] text-slate-400 block mt-0.5">for 24 months with 0% APR Financing</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Cards */}
-      <section className="py-20">
+      <section className="py-16">
         <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <h2 className="text-3xl font-bold text-slate-900 mb-2">Wellness Membership Plans</h2>
+            <p className="text-slate-600 font-light">Join our annual care program for routine preventative wellness and exclusive aesthetic savings.</p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8">
             {membershipPlans.map((plan, idx) => (
               <div 
@@ -119,6 +204,9 @@ export function Pricing() {
       {/* Insurance Partners */}
       <section className="py-16 bg-slate-50 border-y border-slate-200">
         <div className="container mx-auto px-4 lg:px-8 max-w-4xl text-center">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold uppercase tracking-wider mb-4">
+            <ShieldCheck className="w-4 h-4" /> Insurance Coverage
+          </div>
           <h2 className="text-2xl font-bold mb-4">PPO Insurance & Financing</h2>
           <p className="text-slate-600 text-sm font-light mb-8 max-w-xl mx-auto">
             We file claims directly on your behalf for maximum reimbursement. Flexible 0% APR financing is available via CareCredit & Sunbit.
