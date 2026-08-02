@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Clock, ArrowRight, Search } from 'lucide-react'
+import { handleImageError, IMAGES } from '@/lib/images'
 
 const articles = [
   {
@@ -8,7 +9,7 @@ const articles = [
     readTime: '5 min read',
     date: 'August 1, 2026',
     summary: 'Discover how 3D intraoral scanning and custom ceramic layering create natural, light-translucent smiles.',
-    img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.veneers
   },
   {
     title: 'Invisalign vs. Ceramic Braces: Which Is Right for Adult Alignment?',
@@ -16,7 +17,7 @@ const articles = [
     readTime: '4 min read',
     date: 'July 24, 2026',
     summary: 'A detailed clinical comparison of treatment timeline, lifestyle convenience, and alignment precision.',
-    img: 'https://images.unsplash.com/photo-1598256989800-fea5ce5146f1?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.invisalign
   },
   {
     title: 'Why Pain-Free Water-Laser Dentistry Is Replacing Traditional Drills',
@@ -24,7 +25,7 @@ const articles = [
     readTime: '6 min read',
     date: 'July 18, 2026',
     summary: 'How hydrodynamic laser energy performs cavity removals and gum contouring without vibration or anesthesia.',
-    img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.clinic
   }
 ]
 
@@ -77,7 +78,12 @@ export function Blog() {
             <article key={idx} className="apple-card rounded-3xl overflow-hidden bg-white flex flex-col justify-between">
               <div>
                 <div className="aspect-[16/10] overflow-hidden bg-slate-100">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
+                  <img 
+                    src={item.img} 
+                    alt={item.title} 
+                    onError={handleImageError}
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between text-xs text-slate-400 mb-3">

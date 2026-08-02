@@ -1,42 +1,43 @@
 import { useState } from 'react'
 import { Eye } from 'lucide-react'
+import { handleImageError, IMAGES } from '@/lib/images'
 
 const galleryItems = [
   {
     category: 'Veneers',
     title: 'Porcelain Veneers & Smile Alignment',
     patient: 'Jessica T.',
-    img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.veneers
   },
   {
     category: 'Invisalign',
     title: 'Full Arch Clear Aligner Alignment',
     patient: 'David M.',
-    img: 'https://images.unsplash.com/photo-1598256989800-fea5ce5146f1?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.invisalign
   },
   {
     category: 'Implants',
     title: 'Full Restorative Implant Crown',
     patient: 'Arthur P.',
-    img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.implants
   },
   {
     category: 'Facility',
     title: 'Beverly Hills Private Suite',
     patient: 'Clinic Interior',
-    img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.clinic
   },
   {
     category: 'Veneers',
     title: 'Natural Translucent Ceramic Veneers',
     patient: 'Chloe B.',
-    img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.hero
   },
   {
     category: 'Facility',
     title: '3D Imaging Suite',
     patient: 'Technology',
-    img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop'
+    img: IMAGES.clinic
   }
 ]
 
@@ -90,7 +91,12 @@ export function Gallery() {
           {filtered.map((item, idx) => (
             <div key={idx} className="apple-card rounded-3xl overflow-hidden group bg-white">
               <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <img 
+                  src={item.img} 
+                  alt={item.title} 
+                  onError={handleImageError}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                />
                 <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <div className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-lg">
                     <Eye className="w-5 h-5" />
