@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Sparkles, Smile, Activity, Stethoscope, Syringe, Heart, ArrowUpRight } from 'lucide-react'
+import { Sparkles, Smile, Activity, Stethoscope, Syringe, ArrowUpRight } from 'lucide-react'
 
 const services = [
   {
